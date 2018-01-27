@@ -1,4 +1,5 @@
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     entry: ['./src/main.js', './scss/index.scss'],
@@ -23,6 +24,7 @@ module.exports = {
         new ExtractTextPlugin({
             filename:'dist/[name].bundle.css',
             allChunks: true
-        })
+        }),
+        new HtmlWebpackPlugin()
     ]
 };
