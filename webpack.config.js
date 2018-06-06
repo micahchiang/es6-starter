@@ -1,11 +1,12 @@
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 var webpack = require('webpack');
 
 module.exports = {
     entry: ['./src/main.js', './scss/index.scss'],
     output: {
-        filename: "dist/bundle.js"
+        filename: "bundle.js"
     },
     module: {
 
@@ -48,9 +49,16 @@ module.exports = {
             'process.env.NODE_ENV': '"production"',
         }),
         new ExtractTextPlugin({
-            filename:'dist/[name].bundle.css',
+            filename:'[name].bundle.css',
             allChunks: true
         }),
-        new webpack.optimize.UglifyJsPlugin(),
+        new UglifyJsPlugin({
+            uglifyOptions: {
+                compress: {
+                    warnings: false
+                }
+            },
+            sourceMap: true
+        })
     ]
 };
